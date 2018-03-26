@@ -8,9 +8,65 @@ $(document).ready(function() {
             console.log(json);
             var gbpValue = json.rates.GBP ;
             var usdValue = json.rates.USD ;
+            callback()
         },
         fail: function(error) {
             console.log(error);
         }
     })
+
+
+    function loaded() {
+        $("#loading").hide()
+        $("#converter").removeClass("d-none")
+    }
+    
+    $(document).ready(apiRates(loaded))
+    
+    $("#amount").on("input", function() {
+        if (isNaN($("#amount").val())) 
+        {
+            alert("Input must be a number")
+        }
+        else {
+            if ($('input[name=options]:checked', '#output').attr("id") == "eur" ){
+                $("#result").val($("#amount").val())
+            }
+            if ($('input[name=options]:checked', '#output').attr("id") == "usd" ){
+                $("#result").val($("#amount").val() * usdValue)
+            }
+            if ($('input[name=options]:checked', '#output').attr("id") == "gbp" ){
+                $("#result").val($("#amount").val() * gbpValue)
+            }
+        }
+    
+    })
+    
+    $('input[type=radio][name=options]').change(function() {
+        if (isNaN($("#amount").val())) 
+        {
+            
+        }
+        else {
+            if ($('input[name=options]:checked', '#output').attr("id") == "eur" ){
+                $("#result").val($("#amount").val())
+            }
+            if ($('input[name=options]:checked', '#output').attr("id") == "usd" ){
+                $("#result").val($("#amount").val() * usdValue)
+            }
+            if ($('input[name=options]:checked', '#output').attr("id") == "gbp" ){
+                $("#result").val($("#amount").val() * gbpValue)
+            }
+        }
+    
+    })
+
+
+
+
+
+
+
+
 });
+
