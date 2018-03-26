@@ -8,21 +8,13 @@ $(document).ready(function() {
             console.log(json);
             var gbpValue = json.rates.GBP ;
             var usdValue = json.rates.USD ;
-            callback()
+            
         },
         fail: function(error) {
             console.log(error);
         }
     })
 
-
-    function loaded() {
-        $("#loading").hide()
-        $("#converter").removeClass("d-none")
-    }
-    
-    $(document).ready(apiRates(loaded))
-    
     $("#amount").on("input", function() {
         if (isNaN($("#amount").val())) 
         {
