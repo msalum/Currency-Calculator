@@ -17,6 +17,13 @@
     }
     h1 {
         text-align: center;
+    
+    }
+    button {
+        position:absolute;
+        left: 575px;
+        top: 150px;
+        
     }
     table {
         margin:0px auto;
@@ -24,6 +31,7 @@
         border-width: 5px;
         border-color: purple;
     }
+    
 </style>
 
 <body>
@@ -34,19 +42,20 @@
         <tr>
             <td><input id="fromAmount" type="text" size="15"></td>
             <td><select id="from">
-                <option value="EUR" selected>European (EUR)</option>
-                <option value="USD">American Dollar (USD)</option>
-                <option value="EUR">Great Britain Pound (GBP)</option>
+                <option value="EUR" id="fromEur" selected>European (EUR)</option>
+                <option value="USD" id="fromUsd" >American Dollar (USD)</option>
+                <option value="GBP" id="fromGbp">Great Britain Pound (GBP)</option>
             </select></td>
         </tr>
         <tr><td><input id="toAmount" type="text" size="15" disabled></td>
             <td><select id="to">
-                <option value="EUR" selected>European (EUR)</option>
-                <option value="USD">American Dollar (USD)</option>
-                <option value="EUR">Great Britain Pound (GBP)</option>
+                <option value="EUR" id="toEur" selected>European (EUR)</option>
+                <option value="USD" id="toUsd">American Dollar (USD)</option>
+                <option value="GBP" id="toGbp">Great Britain Pound (GBP)</option>
             </select></td>
-        </tr>
+        </tr>   
     </table>
+    <button onclick="calculate()">Calculate</button> 
 </div>
 
 </body>

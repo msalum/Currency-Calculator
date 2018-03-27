@@ -1,3 +1,7 @@
+var gbpValue;
+var usdValue;
+var eurValue;
+
 $(document).ready(function() {
     const apikey = "3294a89da7c5a56d2d1531d480deacfa"
     
@@ -6,59 +10,55 @@ $(document).ready(function() {
         dataType: 'jsonp',
         success: function(json) {
             console.log(json);
-            var gbpValue = json.rates.GBP ;
-            var usdValue = json.rates.USD ;
+            gbpValue = json.rates.GBP ;
+            usdValue = json.rates.USD ;
+            eurValue = json.rates.EUR ;
             
         },
         fail: function(error) {
             console.log(error);
         }
-    })
-
-    $("#fromAmount").on("input", function() {
-        if (isNaN($("#fromAmount").val())) 
-        {
-            alert("Input must be a number")
-        }
-        else {
-            if ($('input[toAmount]:checked', '#output').attr("id") == "eur" ){
-                $("#result").val($("#fromAmount").val())
-            }
-            if ($('input[toAmount]:checked', '#output').attr("id") == "usd" ){
-                $("#result").val($("#fromAmount").val() * usdValue)
-            }
-            if ($('input[toAmount]:checked', '#output').attr("id") == "gbp" ){
-                $("#result").val($("#fromAmount").val() * gbpValue)
-            }
-        }
-    
-    })
-    
-    $('input[type=radio][toAmount]').change(function() {
-        if (isNaN($("#fromAmount").val())) 
-        {
-            
-        }
-        else {
-            if ($('input[toAmount]:checked', '#output').attr("id") == "eur" ){
-                $("#result").val($("#fromAmount").val())
-            }
-            if ($('input[toAmount]:checked', '#output').attr("id") == "usd" ){
-                $("#result").val($("#fromAmount").val() * usdValue)
-            }
-            if ($('input[toAmount]:checked', '#output').attr("id") == "gbp" ){
-                $("#result").val($("#fromAmount").val() * gbpValue)
-            }
-        }
-    
-    })
-
-
-
-
-
-
-
-
+    });
 });
 
+$('input[type=radio][toAmount]').change(function() {
+    calculate();
+});
+
+function calculate() {
+    if (isNaN($("#fromAmount").val())) 
+    {
+        alert("Input must be a number")
+    }
+    else {
+        // from Eur 
+        if ($('option:selected').is("#fromEur")) {
+            if ($('option:selected').is("#toUsd"))
+                $("#toAmount").val($("#fromAmount").val() * usdValue);
+            else if ($('option:selected').is("#toGbp"))
+                $("#toAmount").val($("#fromAmount").val() * gbpValue);
+            else
+                $("#toAmount").val($("#fromAmount").val())
+        }
+        // from USD
+        else if ($('option:selected').is("#fromUsd")) {
+            console.log("USD");
+            if ($('option:selected').is("#toGbp"))
+                $("#toAmount").val($("#fromAmount").val() / usdValue * gbpValue);
+            else if ($('option:selected').is("#toEur"))
+                $("#toAmount").val($("#fromAmount").val() / usdValue);
+            else
+                $("#toAmount").val($("#fromAmount").val())
+        }
+        // from GBP
+        else if ($('option:selected').is("#fromGbp")) {
+            console.log("GBP");
+            if ($('option:selected').is("#toUsd"))
+                $("#toAmount").val($("#fromAmount").val() / gbpValue * usdValue);
+            else if ($('option:selected').is("#toEur"))   
+                $("#toAmount").val($("#fromAmount").val() / gbpValue);
+            else
+                $("#toAmount").val($("#fromAmount").val())
+        }
+    }
+}
