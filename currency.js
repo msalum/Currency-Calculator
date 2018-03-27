@@ -15,39 +15,39 @@ $(document).ready(function() {
         }
     })
 
-    $("#amount").on("input", function() {
-        if (isNaN($("#amount").val())) 
+    $("#fromAmount").on("input", function() {
+        if (isNaN($("#fromAmount").val())) 
         {
             alert("Input must be a number")
         }
         else {
-            if ($('input[name=options]:checked', '#output').attr("id") == "eur" ){
-                $("#result").val($("#amount").val())
+            if ($('input[toAmount]:checked', '#output').attr("id") == "eur" ){
+                $("#result").val($("#fromAmount").val())
             }
-            if ($('input[name=options]:checked', '#output').attr("id") == "usd" ){
-                $("#result").val($("#amount").val() * usdValue)
+            if ($('input[toAmount]:checked', '#output').attr("id") == "usd" ){
+                $("#result").val($("#fromAmount").val() * usdValue)
             }
-            if ($('input[name=options]:checked', '#output').attr("id") == "gbp" ){
-                $("#result").val($("#amount").val() * gbpValue)
+            if ($('input[toAmount]:checked', '#output').attr("id") == "gbp" ){
+                $("#result").val($("#fromAmount").val() * gbpValue)
             }
         }
     
     })
     
-    $('input[type=radio][name=options]').change(function() {
-        if (isNaN($("#amount").val())) 
+    $('input[type=radio][toAmount]').change(function() {
+        if (isNaN($("#fromAmount").val())) 
         {
             
         }
         else {
-            if ($('input[name=options]:checked', '#output').attr("id") == "eur" ){
-                $("#result").val($("#amount").val())
+            if ($('input[toAmount]:checked', '#output').attr("id") == "eur" ){
+                $("#result").val($("#fromAmount").val())
             }
-            if ($('input[name=options]:checked', '#output').attr("id") == "usd" ){
-                $("#result").val($("#amount").val() * usdValue)
+            if ($('input[toAmount]:checked', '#output').attr("id") == "usd" ){
+                $("#result").val($("#fromAmount").val() * usdValue)
             }
-            if ($('input[name=options]:checked', '#output').attr("id") == "gbp" ){
-                $("#result").val($("#amount").val() * gbpValue)
+            if ($('input[toAmount]:checked', '#output').attr("id") == "gbp" ){
+                $("#result").val($("#fromAmount").val() * gbpValue)
             }
         }
     
